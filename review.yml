@@ -1,0 +1,742 @@
+aid: ihg-hotels
+name: IHG Hotels & Resorts
+review:
+  question: Does IHG Hotels & Resorts publish a public, self-serve developer portal
+    or downloadable API specifications, and what would it cost a partner or a guest
+    to leave?
+  answer: false
+  date: '2026-07-28'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: hotel-group
+  gated: true
+findings:
+  summary: |
+    InterContinental Hotels Group PLC (IHG Hotels & Resorts) publishes NO
+    developer portal, NO API reference documentation and NO machine-readable
+    API contract of any kind as of 2026-07-28.
+
+    The interesting fact is that it USED to. PartnerConnect RoomService at
+    pcroomservice.ihg.com was a real, public, TIBCO Mashery developer portal
+    with a registration flow, an API key console ("My API's"), an I/O Docs
+    interactive console, an API gallery, a support forum and a published
+    Commercial API Terms of Use. It documented five APIs by name: Hotel
+    Descriptive Info, Single Property Availability, Rate Range (AREA
+    availability), Hotel Search, and Single Property Availability with Rate
+    Rules. That portal is gone. pcroomservice.ihg.com is NXDOMAIN on Google
+    (8.8.8.8), Cloudflare (1.1.1.1) and Quad9 (9.9.9.9) resolvers; curl exits
+    6 (could not resolve host); the Internet Archive holds page captures only
+    through 2017 and asset captures only through early 2019. Search engines
+    still index the portal and still describe it as operational — that index
+    is stale, and this record deliberately contradicts it on the strength of
+    a direct probe.
+
+    What is still live is partnerconnect.ihg.com (HTTP 200, WordPress 5.2.24).
+    It is an AFFILIATE MARKETING programme, not a developer portal. Its own
+    copy still advertises "PartnerConnect RoomService" giving "access to
+    real-time hotel rates, availability and hotel content API's", but the page
+    contains no link to any technical resource, no API documentation, no
+    endpoint and no key request. Every signup link on the page points at
+    Commission Junction (signup.cj.com publisher signup, regional cids
+    1675692, 4381309, 4386835, 4390377). The linked FAQ PDF is dated 2017 and
+    describes a commission programme, not an API.
+
+    Real API infrastructure demonstrably exists behind Akamai and Mashery.
+    api.ihg.com CNAMEs to ihg.api.mashery.com with an sb-ihg.mashery.com
+    sandbox in the chain — the Mashery gateway that fronted RoomService is
+    still in DNS even though the portal is not. apis.ihg.com, b2b.ihg.com,
+    mcp.ihg.com, booking.ihg.com and status.ihg.com all resolve to Akamai
+    edgekey and answer 403 Access Denied on every path probed.
+    concerto.ihg.com (IHG Concerto, the internal hotel operating platform)
+    resolves to prod-internal.ihg.edgekey.net and answers 401 at /hin/. None
+    of these are documented and none are listed as APIs here.
+
+    The distribution finding is the sector-relevant one, and it inverts the
+    usual reading. IHG is a hotel group large enough to be the lock-in vendor,
+    and in the guest relationship it is. But in its own supply chain it is the
+    LOCKED-IN party: it retired HOLIDEX, the proprietary reservation system
+    Holiday Inn had run since 1965, and moved onto a cloud Guest Reservation
+    System co-developed with Amadeus (announced 2015, rolled out across 2018
+    and early 2019). Group and meetings bookings land in Amadeus Delphi and
+    Meeting Broker. The hotel group's central reservation platform is a GDS
+    company's product.
+
+    No official IHG GitHub organisation was found. No IHG entry exists in
+    APIs.guru. No IHG specification was found on SwaggerHub. No IHG provider
+    record existed in the APIs.io catalogue before this one.
+  developerPortal:
+    url: ''
+    confirmed: false
+    classification: retired
+    note: >-
+      pcroomservice.ihg.com was a genuine self-serve-application Mashery
+      developer portal and is now NXDOMAIN. partnerconnect.ihg.com is live
+      (200) but is an affiliate marketing programme routed through Commission
+      Junction, not a developer portal. No first-party developer portal exists
+      at any probed hostname or path.
+  probes:
+  - url: https://developer.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://developers.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://pcroomservice.ihg.com/
+    status: '000'
+    note: NXDOMAIN on 8.8.8.8, 1.1.1.1 and 9.9.9.9. The retired RoomService developer
+      portal. curl exit code 6.
+  - url: https://roomservice.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://sandbox.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://portal.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://connect.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://partners.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://trade.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://agent.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://agents.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://xml.ihg.com/
+    status: '000'
+    note: DNS does not resolve. No legacy XML endpoint hostname.
+  - url: https://ndc.ihg.com/
+    status: '000'
+    note: DNS does not resolve. Not applicable to a hotel group but probed for completeness.
+  - url: https://trust.ihg.com/
+    status: '000'
+    note: DNS does not resolve. No trust centre.
+  - url: https://gateway.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://distribution.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://content.ihg.com/
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://blog.ihg.com/
+    status: '000'
+    note: NXDOMAIN. The blog link in the live partnerconnect.ihg.com footer is dead.
+  - url: https://partner.ihg.com/
+    status: '000'
+    note: Resolves to 165.2.143.174 but the TLS connection times out.
+  - url: https://dev.ihg.com/
+    status: '000'
+    note: Resolves to 164.109.48.254 but the connection times out.
+  - url: https://docs.ihg.com/
+    status: '000'
+    note: Resolves to ghs.google.com (Google-hosted CNAME) but the connection times
+      out. No content served.
+  - url: https://api.ihg.com/
+    status: '000'
+    note: Resolves through ihg.api.mashery.com and sb-ihg.mashery.com to 52.5.169.108,
+      34.206.166.146 and 34.203.64.33. The TIBCO Mashery API gateway that fronted
+      PartnerConnect RoomService. Connection times out from this client. Not listed
+      as an API — undocumented and unreachable.
+  - url: https://apis.ihg.com/
+    status: '403'
+    note: prod-external.ihg.edgekey.net. AkamaiGHost returns 403 on / and on every
+      path probed.
+  - url: https://apis.ihg.com/openapi.json
+    status: '403'
+    note: Akamai 403. No OpenAPI document.
+  - url: https://apis.ihg.com/swagger.json
+    status: '403'
+    note: Akamai 403. No Swagger document.
+  - url: https://apis.ihg.com/api-docs
+    status: '403'
+    note: Akamai 403.
+  - url: https://apis.ihg.com/.well-known/security.txt
+    status: '403'
+    note: Akamai 403. No security.txt.
+  - url: https://apis.ihg.com/robots.txt
+    status: '403'
+    note: Akamai 403.
+  - url: https://b2b.ihg.com/
+    status: '404'
+    note: prod-b2b.ihg.edgekey.net. Real B2B edge hostname, no content at root.
+  - url: https://mcp.ihg.com/
+    status: '403'
+    note: mcp.ihg.edgekey.net. Akamai "Access Denied". Purpose undocumented and NOT
+      assumed to be Model Context Protocol.
+  - url: https://mcp.ihg.com/.well-known/oauth-protected-resource
+    status: '403'
+    note: Akamai 403. No MCP or OAuth resource metadata.
+  - url: https://booking.ihg.com/
+    status: '403'
+    note: prod-internal.ihg.edgekey.net. Akamai 403.
+  - url: https://concerto.ihg.com/
+    status: '401'
+    note: prod-internal.ihg.edgekey.net; redirects to /hin/ and returns HTTP 401. IHG
+      Concerto, the internal hotel operating platform. Authenticated, internal, undocumented.
+  - url: https://status.ihg.com/
+    status: '301'
+    note: Redirects to https://dash.ihg.com/tools/status.php, which then times out.
+      dash.ihg.com is the hotel-owner intranet, not a public status page.
+  - url: https://www.ihg.com/
+    status: '403'
+    note: Akamai bot defence. Every www.ihg.com path returns 403 to non-browser clients,
+      including /robots.txt, /sitemap.xml, /.well-known/, /developers, /api, /docs,
+      /openapi.json, /swagger.json and /api-docs. A 403 here means "bot blocked",
+      NOT "page absent" — several of these pages are real and are linked from partnerconnect.ihg.com.
+  - url: https://www.ihgplc.com/
+    status: '200'
+    note: Corporate site (Investis-hosted, Cloudflare). Readable. Source of the hotel,
+      room, brand and headquarters facts in apis.yml.
+  - url: https://www.ihgplc.com/.well-known/security.txt
+    status: '404'
+    note: No security.txt on the corporate domain either. No published vulnerability
+      disclosure route was found.
+  - url: https://partnerconnect.ihg.com/
+    status: '200'
+    note: Live affiliate marketing programme. WordPress 5.2.24. Mentions "PartnerConnect
+      RoomService" and "real-time hotel rates, availability and hotel content API's"
+      but links to no technical resource.
+  - url: https://partnerconnect.ihg.com/wp-json/
+    status: '200'
+    note: Incidental WordPress REST API on the affiliate site's CMS. Real and standards-shaped,
+      but it is CMS plumbing rather than an IHG product API, and is deliberately NOT
+      listed in apis.yml.
+  - url: https://partnerconnect.ihg.com/wp-content/uploads/2017/04/FAQ-PartnerConnect.pdf
+    status: '200'
+    note: 219,966-byte PDF, dated 2017. Affiliate programme FAQ. Source of the revocation
+      and CID/PID identifier quotes below.
+  - url: https://www.ihgagent.com/home
+    status: '403'
+    note: Redirects to https://www.ihg.com/agent-portal and is then blocked by Akamai.
+      The travel agent portal exists but could not be read.
+  - url: https://businessedge.ihg.com/
+    status: '403'
+    note: prod-external.ihg.edgekey.net. Akamai 403. IHG Business Edge (SME corporate
+      travel) exists but could not be read.
+  - url: https://api.apis.guru/v2/list.json
+    status: '200'
+    note: No IHG or InterContinental entry in the APIs.guru directory.
+  - url: https://api.swaggerhub.com/specs?query=IHG
+    status: '200'
+    note: No IHG-authored specification found among results.
+  - url: https://api.github.com/search/users?q=ihg+type:org
+    status: '200'
+    note: No official IHG Hotels & Resorts GitHub organisation exists. IHGGM-Aachen,
+      IHGERP, IHG-MRI, IHGMarketplace and similar are unrelated third parties and
+      are not treated as first-party.
+  transports:
+  - protocol: REST/HTTPS
+    documented: false
+    note: Real gateways exist (api.ihg.com via Mashery, apis.ihg.com via Akamai) but
+      no protocol, base URL, operation, schema or authentication scheme is published.
+  - protocol: SOAP/XML
+    documented: false
+    note: No WSDL or XSD published. The retired RoomService API names echo OpenTravel
+      OTA message shapes but no schema was ever published publicly.
+  - protocol: WebSocket
+    documented: false
+    note: None documented.
+  - protocol: GraphQL
+    documented: false
+    note: None documented.
+  authModel:
+    documented: false
+    note: >-
+      The retired RoomService portal issued Mashery-style API keys through a
+      "My API's" page with separate staging and production keys. Nothing about
+      authentication is published today. No OAuth metadata, no
+      /.well-known/openid-configuration, no scopes.
+  webhooks:
+    documented: false
+    note: No webhook, callback or event catalogue is published.
+  openapi:
+    found: false
+    specsSaved: 0
+    note: >-
+      No OpenAPI, Swagger, AsyncAPI, GraphQL SDL, WSDL, XSD, RAML or Postman
+      collection was found at any IHG hostname, in APIs.guru, on SwaggerHub,
+      or on GitHub. The openapi/ directory is omitted because nothing real was
+      harvested.
+  sourceCode:
+    officialGitHubOrg: none
+    note: No first-party IHG GitHub organisation. Third-party reverse-engineering
+      projects (e.g. hc000/ihg-automate, tz1006/hotel-tools) exist and are deliberately
+      NOT listed as IHG interfaces.
+  domainSecurity:
+    securityTxt: false
+    vulnerabilityDisclosure: none-found
+    note: No /.well-known/security.txt on www.ihg.com (403) or www.ihgplc.com (404).
+      No trust centre. trust.ihg.com does not resolve.
+  regulatory:
+    regimes:
+    - UK GDPR / EU GDPR (data subject access and portability, honoured on request
+      via OneTrust webforms and privacyoffice@ihg.com)
+    - US state consumer privacy laws (California, Colorado, Connecticut, Delaware,
+      Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, Nevada, New
+      Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah, Virginia
+      — enumerated verbatim in the IHG privacy statement)
+    - PRC PIPL (Intercontinental Hotel Groups (Shanghai) Co., Ltd. named as PRC data
+      controller; cross-border transfer to Six Continents Ltd (UK) described)
+    note: No sector-specific API regulation (no PSD2/open-banking analogue, no
+      mandated data-sharing regime) applies to a hotel group. Portability here
+      is general privacy law, not industry structure.
+switchingCost:
+  interfaceShape:
+    value: none-published
+    standardNamed: none
+    evidence: >-
+      No interface contract of any kind is published by IHG today. The retired
+      PartnerConnect RoomService portal named five APIs — "Hotel Descriptive
+      Info API", "Single Property Availability API", "Rate range (AREA
+      availability) API", "Hotel Search API" and "Single Property Availability
+      with Rate Rules API" — but never cited a standard. Those names echo
+      OpenTravel Alliance OTA message shapes (OTA_HotelDescriptiveInfoRQ,
+      OTA_HotelAvailRQ) and the archived page describes a hotel-code parameter
+      and a timestamp-delta parameter consistent with OTA-style request
+      messages, but NO OTA version, NO HTNG specification, NO schema and NO
+      WSDL was ever published, so no conformance claim can be made. There is
+      no OpenAPI, Swagger, AsyncAPI, GraphQL SDL, XSD or Postman collection at
+      any IHG hostname, in APIs.guru, on SwaggerHub, or on GitHub.
+      apis.ihg.com answers 403 to /openapi.json, /swagger.json and /api-docs;
+      api.ihg.com (the surviving Mashery gateway) times out.
+    note: >-
+      Scored none-published rather than proprietary-undocumented because IHG
+      does not even name a current API in its own live copy beyond a 2017-era
+      marketing sentence on the affiliate site. A partner integrating with IHG
+      today is building against a shape that has no public existence at all:
+      not a standard, not a documented proprietary contract, not even a named
+      endpoint. Every line of that integration is bilateral and reusable
+      against nothing. Historically the shape was at least discoverable — the
+      2015-2019 Mashery portal is the high-water mark of IHG's API openness,
+      and IHG has moved backwards since.
+  secondSource:
+    value: alternatives-with-migration
+    alternativesConsidered:
+    - name: Amadeus (GDS and Hospitality)
+      note: Both a route to IHG content AND the vendor of IHG's own Guest Reservation
+        System. Group and meetings bookings route into Amadeus Delphi and Meeting
+        Broker. The most entangled alternative.
+    - name: Sabre
+      note: GDS route to IHG chain inventory via chain and property codes. Sabre publishes
+        its own hotel content and booking APIs; an integration against Sabre is not
+        portable to Amadeus.
+    - name: Travelport
+      note: The third GDS, UK-headquartered. Same structural position as Sabre; same
+        non-portability.
+    - name: Expedia Group (Rapid / EPS)
+      note: Wholesale API route to hotel content including major chains. Different
+        rate types, different commercial terms, no loyalty accrual.
+    - name: Booking.com Demand API
+      note: Aggregator route with documented connectivity APIs. Same trade-off.
+    - name: HotelBeds / RateHawk and other bedbanks
+      note: Wholesale routes. Cheapest to integrate, furthest from IHG's own commercial
+        terms.
+    - name: PartnerConnect affiliate links via Commission Junction
+      note: The only route IHG currently publishes. Link-based, not API-based. Earns
+        commission on completed stays; gives no programmatic access to rates or availability.
+    - name: Direct commercial agreement with IHG
+      note: Demonstrably available — hubli announced a live real-time group-booking
+        integration across 6,600+ IHG properties — but there is no published application
+        route, no published contact, no published pricing and no published eligibility
+        criteria.
+    evidence: >-
+      No IHG document names any of these. This is an assessment of the market
+      structure, and it splits in two. For SHOPPING IHG rate and availability
+      content there are genuinely many routes, because a hotel group's
+      inventory is resold by every GDS, OTA and bedbank — an integrator who
+      loses IHG direct access can still sell IHG rooms. For IHG's OWN
+      commercial relationship there is no second source at all: only IHG sells
+      IHG-contracted rates, only IHG accrues IHG One Rewards points, and the
+      archived RoomService join page sold exactly that as the differentiator —
+      "Allow your customers to earn IHG Reward Club points". No aggregator can
+      substitute that.
+    note: >-
+      Scored alternatives-with-migration because the alternatives are real but
+      each exposes its own proprietary interface, so moving is a full
+      re-integration plus a content and commercial regression: different rate
+      types, different net-vs-commissionable economics, no loyalty accrual,
+      and loss of whatever direct-connect content IHG exposes only to
+      contracted partners. It is emphatically NOT interchangeable-alternatives.
+  exitPath:
+    value: export-on-request
+    operationCited: none
+    evidence: >-
+      No export, dump, bulk or reporting operation is published, because no
+      API is published. The only implemented data-portability commitment is
+      consumer-side and lives in the IHG privacy statement, verbatim: "You can
+      ask us to provide your personal information to you in a structured,
+      commonly used, machine-readable format, or you can ask to have it
+      transferred directly to another data controller (e.g. another company).
+      You may only exercise this right where we use your information in order
+      to perform a contract with you, or where we asked for your consent to
+      use your information. This right does not apply to any information which
+      we hold or process that is not held in digital form." And: "You can ask
+      us to confirm whether or not we have, how we are using your personal
+      information and, if applicable, for a copy of your information in a
+      portable format." Requests go through "the forms available in our
+      Privacy and Cookie Center" (OneTrust webforms under
+      privacyportal-de.onetrust.com) or privacyoffice@ihg.com, with a stated
+      45-day response window for US state requests.
+    note: >-
+      This is a UK/EU GDPR Article 20 right and its US state analogues,
+      honoured on request through a webform — not an API operation, not
+      self-serve, and nothing at all for a partner, agency or corporate
+      customer. There is no published mechanism by which an affiliate, a
+      travel agency or a corporate travel programme could extract its own IHG
+      booking book, rate history or content set. And the portability right is
+      explicitly scoped to personal information: a guest can get their profile
+      out, but the thing with actual value — the points balance — is
+      extinguished on exit rather than exported (see contractualLockIn).
+  identifierPortability:
+    summary: IHG-proprietary hotel, brand and region codes with no published mapping
+      to any shared hotel identifier; Commission Junction CID/PID for affiliate tracking;
+      shared GDS chain codes only on the GDS route.
+    identifiersFound:
+    - identifier: IHG hotel code
+      portable: false
+      evidence: 'The archived Hotel Descriptive Info API states "Search has to be done
+        based on the hotel code parameter." The Hotel Search API "Provides name of
+        the hotel, the brand code, hotel code, and region code for all IHG hotels."
+        These are IHG''s own codes, descended from HOLIDEX. No published mapping to
+        any external identifier.'
+    - identifier: IHG brand code
+      portable: false
+      evidence: Returned by the archived Hotel Search API alongside hotel code and
+        region code. IHG-internal.
+    - identifier: IHG region code
+      portable: false
+      evidence: Returned by the archived Hotel Search API. IHG-internal.
+    - identifier: GDS chain codes
+      portable: true
+      evidence: Not published by IHG. IHG brands carry two-letter chain codes in Amadeus,
+        Sabre and Travelport like every other chain, which is what makes the GDS route
+        a genuine alternative — but IHG publishes no mapping from its own hotel codes
+        to those chain and property codes, so the mapping must be reconstructed from
+        the GDS side.
+    - identifier: GIATA ID
+      portable: true
+      evidence: Not found. IHG publishes no GIATA identifier, no OpenTravel property
+        identifier and no other cross-industry hotel key anywhere.
+    - identifier: Commission Junction CID and PID
+      portable: false
+      evidence: 'PartnerConnect FAQ, verbatim: "You will be given one Customer ID (CID)
+        and each separate site will have its own unique PID. PID refers to your Commission
+        Junction publisher Web site ID. This is necessary to create your unique URL
+        so bookings can be tracked back to your account and credited to each site''s
+        unique PID." These are Commission Junction''s keys, not IHG''s and not the
+        partner''s. Leaving CJ means relinking every tracked URL.'
+    - identifier: IHG One Rewards member number
+      portable: false
+      evidence: 'Member terms require "To maintain and use only one IHG One Rewards
+        account at any time". The account and its balance are IHG-internal and, per
+        the cancellation clause, are extinguished rather than transferred on exit.'
+    - identifier: IATA / ARC agency accreditation number
+      portable: notRequired
+      evidence: Neither the PartnerConnect terms, the FAQ nor the archived RoomService
+        Terms of Use mention IATA accreditation, ARC, BSP or an agency numeric code
+        as a prerequisite. Eligibility for the affiliate programme is a Commission
+        Junction application; eligibility for a direct API was an IHG account manager's
+        approval.
+    note: >-
+      Everything IHG's own interface hung on was an IHG key. The archived API
+      family is keyed end-to-end on IHG hotel code, brand code and region code
+      — not on any shared hotel identifier — so a partner's stored mapping
+      table is worthless the moment they leave, and rebuilding it against a
+      GDS or bedbank means re-matching the whole estate property by property.
+      The one genuinely portable identifier class (GDS chain and property
+      codes) is precisely the one IHG does not publish.
+  contractualLockIn:
+    published: partially
+    currentDocuments:
+    - name: IHG One Rewards Member Terms and Conditions
+      url: https://www.ihg.com/content/gb/en/customer-care/member-tc
+      status: live (read via Internet Archive capture 2026-01-15; www.ihg.com returns
+        403 to non-browser clients)
+    - name: IHG Privacy Statement
+      url: https://www.ihg.com/content/us/en/customer-care/privacy_statement
+      status: live (read via Internet Archive capture 2026-07-17)
+    - name: PartnerConnect FAQ (PDF, 2017)
+      url: https://partnerconnect.ihg.com/wp-content/uploads/2017/04/FAQ-PartnerConnect.pdf
+      status: live, HTTP 200
+    retiredDocuments:
+    - name: IHG Commercial API Terms of Use (PartnerConnect RoomService)
+      url: https://web.archive.org/web/20150926153219/https://pcroomservice.ihg.com/Terms_of_use
+      status: portal decommissioned; text preserved only in the Internet Archive
+    verbatim:
+    - clause: Governing agreements (retired RoomService Terms of Use)
+      source: pcroomservice.ihg.com/Terms_of_use, archived 2015-09-26
+      text: '"The InterContinental Hotels Group RoomService portal, owned by Six Continents
+        Hotels, Inc. (“SCH”) and powered by Mashery, is subject to the SCH E-commerce
+        Master Service Agreement for direct Vendors, Agencies, and Media Companies
+        (“Affiliates”) and the Master PartnerConnect Terms and Conditions
+        accepted by Affiliates at the time of application to the program through a
+        network portal. Registration to the RoomService portal is granted in agreement
+        to these same terms and this is a binding and enforceable agreement between
+        Affiliate and SCH."'
+    - clause: Volume commitments (retired RoomService Terms of Use)
+      source: pcroomservice.ihg.com/Terms_of_use, archived 2015-09-26
+      text: '"Affiliate shall be responsible for any failure to achieve volume or other
+        commitments that results from Affiliate’s failure to comply with these
+        Terms of Use." And, among unacceptable uses: "Exceed any volume limitations
+        included in the applicable Service Schedule."'
+    - clause: API parameters classed as Confidential Information (retired RoomService
+        Terms of Use)
+      source: pcroomservice.ihg.com/Terms_of_use, archived 2015-09-26
+      text: '"Confidential Information shall also include information provided by one
+        party, which under the circumstances surrounding the disclosure would be reasonably
+        deemed confidential or proprietary including, without limitation, the following:
+        ... (c) performance data, creative, API parameters, user based portal content
+        or proprietry development and coding."'
+    - clause: Immediate suspension (retired RoomService Terms of Use)
+      source: pcroomservice.ihg.com/Terms_of_use, archived 2015-09-26
+      text: '"If Affiliate or any of its users restricts or inhibits any other Affiliate
+        or user of RoomService, then SCH may, in its sole reasonable discretion, terminate
+        or suspend the right of Affiliate or Affiliate’s user to access RoomService,
+        effective immediately."'
+    - clause: Unilateral amendment (retired RoomService Terms of Use)
+      source: pcroomservice.ihg.com/Terms_of_use, archived 2015-09-26
+      text: '"SCH may from time to time modify these Terms of Use, either by posting
+        the revised Terms of Use at this link or by delivering written notice of such
+        modification to Affiliate. Affiliate use of RoomService following such modification
+        shall be deemed to be Affiliate’s acceptance of any such modification."'
+    - clause: Membership revocable at any time (PartnerConnect FAQ, 2017)
+      source: partnerconnect.ihg.com FAQ PDF, HTTP 200 on 2026-07-28
+      text: '"anyone may submit an application, but we do reserve the right to refuse
+        membership to a site or revoke a site’s membership at any time if we deem
+        that it contains objectionable material."'
+    - clause: Link integrity obligation (PartnerConnect FAQ, 2017)
+      source: partnerconnect.ihg.com FAQ PDF
+      text: '"You are responsible for implementing your links correctly and testing
+        the links to make sure that bookings are tracked properly. You can not alter
+        links by removing any parameters that are in your customized links. IHG is
+        not responsible for untracked transactions due to improper link implementation."'
+    - clause: Total forfeiture on account cancellation (IHG One Rewards member terms)
+      source: www.ihg.com/content/gb/en/customer-care/member-tc, archived 2026-01-15
+      text: '"Members whose accounts are cancelled, by IHG or by the Member, will forfeit
+        all Points, Point vouchers, Reward Nights, and any other benefits associated
+        with the account, and the Member will no longer be able to earn or redeem Points
+        under this Programme."'
+    - clause: Programme at sole discretion, assignable (IHG One Rewards member terms)
+      source: www.ihg.com/content/gb/en/customer-care/member-tc, archived 2026-01-15
+      text: '"The Programme and its benefits are offered at the sole discretion of
+        IHG. IHG may assign or transfer any rights or obligations under this Programme,
+        or any other loyalty programme, at any time to any related or unrelated entity,
+        in its sole discretion."'
+    - clause: Non-transferable benefits (IHG One Rewards member terms)
+      source: www.ihg.com/content/gb/en/customer-care/member-tc, archived 2026-01-15
+      text: '"Member benefits (including without limitation those for InterContinental
+        Ambassador and IHG Business Rewards) are only for the individual Member, are
+        not transferable and cannot be used by other Members or Non-Members."'
+    - clause: Termination and points revocation (IHG One Rewards member terms)
+      source: www.ihg.com/content/gb/en/customer-care/member-tc, archived 2026-01-15
+      text: '"IHG has the right to terminate a Member’s account and/or revoke
+        Member Points if an account has multiple email addresses and/or is suspected
+        of being related to fraudulent or abusive activity. IHG reserves the right
+        to terminate the Member accounts and/or revoke Points from accounts without
+        valid contact information."'
+    notPublished:
+    - The Master PartnerConnect Terms and Conditions themselves (referenced by name,
+      never published)
+    - The SCH E-commerce Master Service Agreement (referenced by name, never published)
+    - Any current API agreement, service schedule or rate card
+    - Minimum term or contract length for a partner integration
+    - Exclusivity or full-content obligations
+    - Per-booking or per-transaction fees payable by a partner to IHG
+    - Termination notice period
+    - Commission rates (the FAQ states a percentage of room revenue but never the percentage)
+    - Service-level, uptime or rate-limit commitments
+    - Any franchisee-side connectivity, CRS-fee or distribution-cost terms
+    note: >-
+      The pattern is the sector's classic one: behavioural terms are published,
+      commercial terms are not, and the two most important documents — the
+      Master PartnerConnect Terms and Conditions and the SCH E-commerce Master
+      Service Agreement — are named in a public document but have never
+      themselves been public. The single most quotable lock-in clause in this
+      whole record is not an API term at all: it is the loyalty forfeiture
+      clause. A guest who leaves IHG loses every point, voucher and reward
+      night, whether IHG closes the account or they do. That is switching cost
+      expressed as confiscation, and it is stated plainly in live terms.
+  accessGate:
+    value: application-approval
+    selfServe: false
+    whatADeveloperMustSign: >-
+      There is no published route to an IHG API today. The only published
+      onboarding is the PartnerConnect affiliate programme: submit an
+      application through Commission Junction (signup.cj.com publisher signup,
+      regional cid), be reviewed and accepted by IHG, and be bound by the
+      Master PartnerConnect Terms and Conditions, with IHG reserving the right
+      to "revoke a site's membership at any time". Direct commercial
+      relationships plainly exist (hubli's live group-booking integration
+      across 6,600+ properties) but IHG publishes no application form, no
+      contact, no pricing and no eligibility criteria for them; the only
+      published route to a conversation is emailing partnerconnect@ihg.com
+      with "NEW VENDOR REQUEST" in the subject line. No IATA or ARC
+      accreditation is named as a requirement. There is no sandbox, no trial,
+      no self-serve API key and no published rate limits.
+    historicGate: >-
+      The retired RoomService portal was more open than anything IHG offers
+      now, and its process is worth recording because it is what the sector
+      has moved away from. Verbatim from the archived join page: "Click the
+      “Get Started” button above to complete the one page account
+      registration form. Once you submit, an IHG Account Manager will review
+      your application within three business days." Then: "Log in to your
+      account and visit the My API's page to create your staging and
+      production API keys." Then: "Staging keys are live within Q/A for you to
+      test implementations right away. Production keys are disabled until
+      enabled by an IHG account manager. To have your production key enabled,
+      submit a sample call and response for each API to RoomService@IHG.com.
+      Samples will be reviewed within three business days."
+    note: Application-approval both then and now — but in 2015 a developer could
+      self-register, get a staging key the same day and read the docs; in 2026 there
+      is nothing to register for.
+  distributionModel:
+    value: gds-intermediated
+    detail: >-
+      IHG is a franchisor and manager that aggregates 7,014 independently
+      owned and operated properties into one central reservation system and
+      distributes that inventory through four routes: its own ihg.com sites
+      and app (the channel it promotes hardest, and the only one that accrues
+      IHG One Rewards on IHG's own terms), the three GDSs and their agency
+      terminals, OTAs and wholesalers, and corporate/group channels. The
+      structural fact that matters is that IHG does not own its own
+      reservation platform. It announced a partnership with Amadeus in 2015 to
+      build a cloud Guest Reservation System to replace HOLIDEX — Holiday
+      Inn's proprietary reservation system, in service since 1965 — and
+      migrated onto it across 2018 and early 2019. Group and meetings bookings
+      route into Amadeus Delphi and Meeting Broker. Scored gds-intermediated
+      rather than channel-manager because IHG operates chain-scale CRS
+      connectivity to the GDSs directly rather than sitting behind a
+      third-party channel manager, and rather than direct-only because agency,
+      OTA and wholesale volume is a first-class channel, not an exception.
+    note: >-
+      This is the inversion worth capturing for the sector question. In the
+      guest and affiliate relationships IHG is the party imposing switching
+      cost. In its own supply chain it is the party who paid it: the hotel
+      group retired a sixty-year-old proprietary system and moved its core
+      transactional platform onto a GDS company's cloud product. The lock-in
+      in travel does not stop at the airline; it goes all the way up.
+  ndcPosture:
+    applicable: false
+    summary: not applicable
+    note: >-
+      IATA NDC is an airline distribution standard and does not apply to a
+      hotel group. Probed anyway for completeness: ndc.ihg.com does not
+      resolve and no IHG document found uses the term. The hospitality
+      analogues would be OpenTravel/OTA and HTNG, and IHG cites neither
+      anywhere public — which is the same finding NDC would have produced for
+      an airline that publishes no standard reference.
+sources:
+- url: https://www.ihgplc.com/en/about-us
+  type: CorporateWebsite
+  status: '200'
+  fetched: '2026-07-28'
+  note: 'Verbatim scale facts: "7,014 Hotels globally", "1,035,589 Rooms globally",
+    "more than 100 countries", "around 400,000 colleagues", 20 brands, IHG One Rewards.'
+- url: https://www.ihgplc.com/en/contact-us
+  type: CorporateWebsite
+  status: '200'
+  fetched: '2026-07-28'
+  note: 'Verbatim global headquarters: "InterContinental Hotels Group PLC Windsor Dials
+    1 Arthur Road Windsor Berkshire SL4 1RS UK Telephone: +44 (0) 1753 972 000". Americas
+    office 3 Ravinia Drive, Atlanta.'
+- url: https://partnerconnect.ihg.com/
+  type: PartnerProgram
+  status: '200'
+  fetched: '2026-07-28'
+  note: 'Live affiliate programme. Mentions "PartnerConnect RoomService" and "access
+    to real-time hotel rates, availability and hotel content API''s" with no technical
+    link. All signup links point at signup.cj.com. Brand links enumerate the portfolio
+    used in apis.yml.'
+- url: https://partnerconnect.ihg.com/wp-content/uploads/2017/04/FAQ-PartnerConnect.pdf
+  type: PartnerProgramFAQ
+  status: '200'
+  fetched: '2026-07-28'
+  note: Source of the revocation clause, the link-integrity obligation, the CID/PID
+    identifier description, the Commission Junction relationship and the partnerconnect@ihg.com
+    "NEW VENDOR REQUEST" route.
+- url: https://web.archive.org/web/20170503133654/https://pcroomservice.ihg.com/api_description
+  type: RetiredDocumentation
+  status: '200'
+  fetched: '2026-07-28'
+  note: 'The only surviving description of IHG''s API family. Five APIs named verbatim:
+    Hotel Descriptive Info API, Single Property Availability API, Rate range (AREA
+    availability) API, Hotel Search API, Single Property Availability with Rate Rules
+    API. Live host is NXDOMAIN.'
+- url: https://web.archive.org/web/20150926153219/https://pcroomservice.ihg.com/Terms_of_use
+  type: RetiredTermsOfService
+  status: '200'
+  fetched: '2026-07-28'
+  note: 'Titled "IHG Commercial API Terms of Use". Source of every contractual quote
+    above: governing agreements, volume commitments, API parameters as Confidential
+    Information, immediate suspension, unilateral amendment.'
+- url: https://web.archive.org/web/20150926153716/https://pcroomservice.ihg.com/join
+  type: RetiredOnboarding
+  status: '200'
+  fetched: '2026-07-28'
+  note: Three-step onboarding verbatim (register, apply for keys, get enabled), the
+    three-business-day review, the staging/production key split, RoomService@IHG.com,
+    and the loyalty differentiator "Allow your customers to earn IHG Reward Club points".
+- url: https://web.archive.org/web/20150926153351/https://pcroomservice.ihg.com/gallery
+  type: RetiredDocumentation
+  status: '200'
+  fetched: '2026-07-28'
+  note: Widget gallery restating the five APIs' data-returned and value-to-partners
+    summaries.
+- url: https://web.archive.org/web/20260717102857/https://www.ihg.com/content/us/en/customer-care/privacy_statement
+  type: PrivacyStatement
+  status: '200'
+  fetched: '2026-07-28'
+  note: Source of the data-portability quotes, the Privacy and Cookie Center / OneTrust
+    routing, privacyoffice@ihg.com, the 45-day US response window, the US state list,
+    the PRC controller entity and the Six Continents Hotels, Inc. loyalty operator
+    fact. Read via archive because www.ihg.com returns 403 to non-browser clients.
+- url: https://web.archive.org/web/20260115050000/https://www.ihg.com/content/gb/en/customer-care/member-tc
+  type: LoyaltyTerms
+  status: '200'
+  fetched: '2026-07-28'
+  note: Source of the total-forfeiture-on-cancellation clause, the sole-discretion
+    and assignment clause, the non-transferable-benefits clause and the termination/points-revocation
+    clause.
+- url: https://www.ihgplc.com/en/news-and-media/news-releases/2015/ihg-and-amadeus-to-revolutionise-the-technological-foundations-of-the-global-hospitality-i
+  type: PressRelease
+  note: IHG and Amadeus partnership to build a cloud Guest Reservation System replacing
+    HOLIDEX. Basis for the distribution-model finding that IHG's core reservation platform
+    is a GDS company's product. Rollout across 2018 and early 2019 reported by PhocusWire
+    and Skift.
+- url: https://blog.hubli.com/hubli-and-ihg-launch-group-booking-api-for-6600-properties/
+  type: ThirdPartyAnnouncement
+  status: '200'
+  fetched: '2026-07-28'
+  note: Evidence that a real, current, partner-only IHG API exists — "next-generation,
+    real-time API integration" across 6,600+ properties, with bookings delivered "directly
+    into the hotels Amadeus Delphi and Meeting Broker management system with pricing
+    data in turn being returned via API". No standard named, no access route published.
+actions:
+  apisYmlUpdated: true
+  openapiHarvested: false
+  specsSaved: 0
+  reason: >-
+    Recorded as an honest stub with a full switching-cost record. IHG operates
+    real, production APIs — a Mashery gateway still in DNS at api.ihg.com, five
+    Akamai-fronted hostnames, and a live partner integration hubli announced
+    across 6,600+ properties — but publishes no developer portal, no reference
+    documentation, no machine-readable specification, no authentication
+    metadata and no webhook catalogue. apis[] is intentionally empty: listing
+    an Akamai-gated hostname or a decommissioned 2017 Mashery portal as a live
+    API would be fabrication. openapi/ is omitted because nothing real was
+    harvested. The value of this record is threefold: it documents an API
+    programme that went BACKWARDS (a public self-registration developer portal
+    in 2015, nothing at all in 2026); it preserves the actual text of an API
+    terms-of-use that classed "API parameters" as Confidential Information and
+    imposed volume commitments; and it captures the sector inversion — the
+    hotel group that imposes switching cost on guests and affiliates is itself
+    locked into a GDS company's reservation platform.
