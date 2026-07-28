@@ -1,0 +1,88 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  npm registry search, PyPI, RubyGems, plus the IHG affiliate and corporate
+  sites. Probed 2026-07-28.
+summary: >-
+  IHG publishes no client library for any API, in any language. There is no
+  first-party SDK, no CLI binary and no corporate npm/PyPI/Maven/NuGet/RubyGems
+  organisation. This is expected: IHG publishes no API to build an SDK against.
+  What the registries do contain is three unrelated classes of package, all
+  recorded below and none of them an IHG API client, so NO `SDKs` pointer is
+  wired into apis.yml — doing so would credit IHG with an SDK surface it does
+  not have.
+official_sdk_count: 0
+registries_probed:
+- {registry: npm, query: ihg, result: no first-party API client}
+- {registry: pypi, queries: [ihg, ihg-api, ihg-hotels], result: 404 on all}
+- {registry: rubygems, query: ihg, result: no results}
+- {registry: packagist, result: no first-party package}
+- {registry: maven-central, result: no first-party group}
+- {registry: nuget, result: no first-party package}
+- {registry: crates.io, result: no first-party crate}
+- {registry: pkg.go.dev, result: no first-party module}
+packages: []
+related_packages:
+- name: ihg-ng-common
+  registry: npm
+  url: https://www.npmjs.com/package/ihg-ng-common
+  version: 0.1.5
+  license: MIT
+  last_published: '2022-06-19'
+  official: false
+  classification: employee-published-ui-library
+  note: >-
+    An Angular 5 component library authored by an IHG employee
+    (author venkat.bandlamudi@ihg.com; a co-maintainer publishes from
+    jedraczka.zbigniew@ihg.com). It is NOT an API client — it is internal
+    front-end UI plumbing, its repository field is the unedited scaffold
+    placeholder github.com/username/repo, and it is published from personal
+    npm accounts rather than an IHG organisation. Recorded as evidence of
+    IHG engineering activity on npm, explicitly not marked official.
+- name: ihg-ng-common-pages
+  registry: npm
+  url: https://www.npmjs.com/package/ihg-ng-common-pages
+  version: 0.1.1
+  license: MIT
+  last_published: '2022-05-05'
+  official: false
+  classification: employee-published-ui-library
+  note: Sibling of ihg-ng-common, same author and same scaffold placeholder repository.
+- name: ihg-common
+  registry: npm
+  url: https://www.npmjs.com/package/ihg-common
+  version: 0.0.0
+  official: false
+  classification: abandoned-scaffold
+  note: Empty Angular CLI scaffold published by the same personal account. No content.
+- name: ihg-connector
+  registry: npm
+  url: https://www.npmjs.com/package/ihg-connector
+  version: 1.0.10
+  official: false
+  classification: unrelated-third-party
+  note: >-
+    "connector for sso", published by an unaffiliated personal account. No
+    evidence of any IHG relationship beyond the name.
+- name: ihg
+  registry: npm
+  url: https://www.npmjs.com/package/ihg
+  official: false
+  classification: third-party-scraper
+  note: >-
+    "a IHG hotels price fetcher" — a third-party scraper of ihg.com, not an
+    API client. Not an IHG interface.
+- name: '@striderlabs/mcp-ihg'
+  registry: npm
+  url: https://www.npmjs.com/package/@striderlabs/mcp-ihg
+  version: 1.0.1
+  last_published: '2026-06-17'
+  official: false
+  classification: third-party-mcp-browser-automation
+  note: >-
+    "MCP server connector for IHG Hotels (Holiday Inn, InterContinental, etc.)
+    using Playwright browser automation". A third-party MCP server that drives
+    the ihg.com website with a headless browser precisely because no IHG API is
+    available. It is the clearest market signal in this file: the demand for
+    programmatic IHG access is being met by scraping, not by IHG. See
+    mcp/ihg-hotels-mcp.yml.

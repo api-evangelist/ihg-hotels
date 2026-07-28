@@ -1,0 +1,116 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  IHG corporate site, affiliate site, archived RoomService portal, and live
+  host probes. No OpenAPI exists in this repo to derive from. Probed 2026-07-28.
+summary: >-
+  No conformance claim can be made for IHG, in either direction, because no
+  interface contract is published. Every standard below is marked
+  conforms: false with the same underlying evidence — nothing is published to
+  measure. This is deliberately recorded rather than omitted: for a group of
+  7,014 hotels sitting at the centre of global hotel distribution, the absence
+  of a single named interface standard is itself the finding. No `Compliance`
+  pointer is wired into apis.yml, because IHG publishes no certification or
+  compliance programme for its API surface.
+standards:
+- id: opentravel-ota
+  name: OpenTravel Alliance OTA messages
+  conforms: false
+  evidence: >-
+    No OTA version, message set or schema is cited anywhere by IHG. The five
+    retired RoomService API names (Hotel Descriptive Info, Single Property
+    Availability, Rate range/AREA availability, Hotel Search, Single Property
+    Availability with Rate Rules) echo OTA message shapes such as
+    OTA_HotelDescriptiveInfoRQ and OTA_HotelAvailRQ, and the archived page
+    describes a hotel-code parameter and a timestamp-delta parameter consistent
+    with OTA-style requests — but no conformance was ever asserted and no XSD
+    was ever published. Resemblance is not conformance.
+- id: htng
+  name: Hotel Technology Next Generation specifications
+  conforms: false
+  evidence: >-
+    No HTNG specification is referenced on any IHG property. HTNG is the
+    hospitality analogue of the airline NDC layer and would be the natural
+    standard for a group of this size; IHG names it nowhere public.
+- id: openapi
+  name: OpenAPI Specification
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document at any IHG hostname, in APIs.guru, on
+    SwaggerHub, or on GitHub. /openapi.json, /openapi.yaml, /swagger.json,
+    /v1/openapi.json, /api-docs, /docs and /redoc all return 403 on
+    apis.ihg.com and dev-apis.ihg.com and 404 on b2b.ihg.com.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: No event, webhook or streaming surface is documented. Not applicable.
+- id: graphql
+  name: GraphQL
+  conforms: false
+  evidence: >-
+    Introspection POSTs to apis.ihg.com/graphql, www.ihg.com/graphql,
+    dev-apis.ihg.com/graphql return 403 and b2b.ihg.com/graphql returns 404.
+    No SDL published.
+- id: soap-wsdl
+  name: SOAP / WSDL
+  conforms: false
+  evidence: No WSDL or XSD published. xml.ihg.com does not resolve.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    No authorization-server metadata (RFC 8414) on any host; every
+    /.well-known/oauth-authorization-server probe returns 403 or 404. The
+    retired RoomService portal issued Mashery-style API keys, not OAuth tokens.
+- id: openid-connect
+  name: OpenID Connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 403 or 404 on every IHG host.
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: No error contract is published; no response can be inspected.
+- id: rfc9116-security-txt
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: >-
+    No /.well-known/security.txt on ihg.com, ihgplc.com or partnerconnect.ihg.com.
+    See well-known/ihg-hotels-well-known.yml.
+- id: rfc9727-api-catalog
+  name: RFC 9727 /.well-known/api-catalog
+  conforms: false
+  evidence: 403 or 404 on all eight probed hosts.
+- id: rfc8594-sunset-header
+  name: RFC 8594 Sunset header
+  conforms: false
+  evidence: >-
+    No deprecation policy exists. The RoomService portal was retired with no
+    notice, no Sunset signalling and no successor.
+- id: model-context-protocol
+  name: Model Context Protocol
+  conforms: false
+  evidence: >-
+    tools/list JSON-RPC POSTs to mcp.ihg.com (/, /mcp, /sse) and apis.ihg.com/mcp
+    all return 403. mcp.ihg.com resolves but its purpose is undocumented and is
+    not assumed to be MCP.
+- id: llms-txt
+  name: llms.txt
+  conforms: false
+  evidence: >-
+    www.ihg.com/llms.txt returns 403 (Akamai bot defence) and
+    www.ihgplc.com/llms.txt returns 404. A generated llms.txt is published in
+    this repo at llms/ihg-hotels-llms.txt as an API Evangelist artifact, not as
+    an IHG one.
+regulatory:
+  note: >-
+    IHG is subject to general privacy regimes but no sector-specific API
+    regulation. There is no hospitality analogue of PSD2 or the CDR: no mandated
+    data-sharing regime compels IHG to publish an interface, which is a
+    structural reason the programme was able to disappear without consequence.
+  regimes:
+  - UK GDPR / EU GDPR — data subject access and portability honoured on request
+    via OneTrust webforms and privacyoffice@ihg.com
+  - US state consumer privacy laws — twenty states enumerated verbatim in the
+    IHG privacy statement, with a stated 45-day response window
+  - PRC PIPL — Intercontinental Hotel Groups (Shanghai) Co., Ltd. named as the
+    PRC data controller, with cross-border transfer to Six Continents Ltd (UK)

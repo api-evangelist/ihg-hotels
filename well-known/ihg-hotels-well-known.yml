@@ -1,0 +1,142 @@
+generated: '2026-07-28'
+method: searched
+source: live HTTP probes of every IHG host reachable from apis.yml and review.yml
+summary: >-
+  IHG publishes no /.well-known/ discovery surface on any host. Every probe
+  below was run on 2026-07-28 with a browser User-Agent against the eight IHG
+  hostnames that resolve. Not one document was returned. The API-bearing hosts
+  (apis.ihg.com, dev-apis.ihg.com, mcp.ihg.com, booking.ihg.com) sit behind
+  Akamai and answer 403 Access Denied to every path including /.well-known/;
+  concerto.ihg.com answers 401; the two hosts that will actually serve content
+  (partnerconnect.ihg.com, www.ihgplc.com) answer 404. No security.txt, no
+  OpenID Connect discovery document, no RFC 8414 authorization-server metadata,
+  no RFC 9727 api-catalog and no ai-plugin.json exists anywhere on ihg.com or
+  ihgplc.com. A 403 here means "edge rule blocked the request", not "the
+  document is absent" — but the practical result for any consumer, human or
+  agent, is identical: nothing is discoverable.
+documents_found: 0
+hosts:
+- host: https://apis.ihg.com
+  edge: prod-external.ihg.edgekey.net (AkamaiGHost)
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+- host: https://dev-apis.ihg.com
+  edge: np-external.ihg.edgekey.net (AkamaiGHost)
+  note: >-
+    Non-production external API edge. Discovered this round from a third-party
+    public Postman workspace that contains a saved request to
+    https://dev-apis.ihg.com/eks/reservations/v2/hotels — evidence of a real
+    reservations API surface with a /eks/reservations/v2 path shape. The host
+    resolves and terminates TLS 1.3 but returns 403 on every path.
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+- host: https://b2b.ihg.com
+  edge: prod-b2b.ihg.edgekey.net (AkamaiNetStorage)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://mcp.ihg.com
+  edge: mcp.ihg.edgekey.net (AkamaiGHost)
+  note: >-
+    Hostname purpose is undocumented and is NOT assumed to be Model Context
+    Protocol. A JSON-RPC tools/list POST to /, /mcp and /sse with
+    Accept: application/json, text/event-stream returned 403 in every case.
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+- host: https://booking.ihg.com
+  edge: prod-internal.ihg.edgekey.net (AkamaiGHost)
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+- host: https://concerto.ihg.com
+  edge: prod-internal.ihg.edgekey.net
+  note: IHG Concerto, the internal hotel operating platform. Answers 401 everywhere.
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/oauth-protected-resource, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/ai-plugin.json, status: 401}
+- host: https://partnerconnect.ihg.com
+  edge: nginx (WordPress 5.2.24)
+  note: The live affiliate marketing programme. Serves content, publishes nothing.
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://www.ihgplc.com
+  edge: cloudflare (Investis-hosted corporate site)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://www.ihg.com
+  edge: AkamaiGHost (bot defence)
+  note: >-
+    Every path returns 403 to non-browser clients, including /robots.txt and
+    /llms.txt. A 403 here is a bot block, not proof of absence.
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /llms.txt, status: 403}
+contract_discovery:
+  note: >-
+    Full STEP 0b contract-discovery sweep run 2026-07-28 before concluding
+    "no spec". Every candidate missed.
+  openapi_paths_probed:
+  - {url: 'https://apis.ihg.com/openapi.json', status: 403}
+  - {url: 'https://apis.ihg.com/openapi.yaml', status: 403}
+  - {url: 'https://apis.ihg.com/swagger.json', status: 403}
+  - {url: 'https://apis.ihg.com/v1/openapi.json', status: 403}
+  - {url: 'https://apis.ihg.com/api-docs', status: 403}
+  - {url: 'https://apis.ihg.com/docs', status: 403}
+  - {url: 'https://apis.ihg.com/redoc', status: 403}
+  - {url: 'https://dev-apis.ihg.com/openapi.json', status: 403}
+  - {url: 'https://dev-apis.ihg.com/swagger.json', status: 403}
+  - {url: 'https://dev-apis.ihg.com/api-docs', status: 403}
+  - {url: 'https://b2b.ihg.com/openapi.json', status: 404}
+  - {url: 'https://b2b.ihg.com/swagger.json', status: 404}
+  - {url: 'https://b2b.ihg.com/api-docs', status: 404}
+  graphql_introspection:
+  - {url: 'https://apis.ihg.com/graphql', status: 403}
+  - {url: 'https://www.ihg.com/graphql', status: 403}
+  - {url: 'https://b2b.ihg.com/graphql', status: 404}
+  - {url: 'https://dev-apis.ihg.com/graphql', status: 403}
+  mcp_tools_list:
+  - {url: 'https://mcp.ihg.com/', status: 403}
+  - {url: 'https://mcp.ihg.com/mcp', status: 403}
+  - {url: 'https://mcp.ihg.com/sse', status: 403}
+  - {url: 'https://apis.ihg.com/mcp', status: 403}
+  result: >-
+    No OpenAPI, Swagger, GraphQL SDL, AsyncAPI or MCP tools/list manifest was
+    obtained from any IHG host. This is a genuine absence for any unauthenticated
+    consumer, confirmed across production, non-production and edge hostnames.

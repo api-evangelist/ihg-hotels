@@ -1,0 +1,77 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  IHG corporate and affiliate sites, live host probes, and Internet Archive
+  captures of the retired PartnerConnect RoomService portal. Probed 2026-07-28.
+summary: >-
+  IHG publishes no API lifecycle commitments of any kind — no versioning
+  policy, no deprecation policy, no Sunset/Deprecation header contract, no SLA
+  and no public status page. It has, however, executed the single largest
+  lifecycle event available to an API provider: it retired an entire public
+  developer programme without notice, redirect, archive or successor. That
+  event is recorded below because it is the honest lifecycle story here.
+versioning:
+  scheme: none-published
+  current: null
+  docs: null
+  note: >-
+    No version identifier is published for any IHG API. The only version
+    fragment ever observed in the wild is the path /eks/reservations/v2/ on
+    dev-apis.ihg.com, captured in a third-party public Postman workspace —
+    which implies URI-path versioning and at least a second major version of a
+    reservations API, but IHG documents neither.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No deprecation policy, no notice period, no Sunset (RFC 8594) or
+    Deprecation header commitment. The precedent set by the RoomService
+    retirement is the opposite of a policy: the portal, its documentation, its
+    key console and its DNS record were all removed, leaving stale search
+    engine results as the only surviving description of the programme.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment for any API or partner interface.
+status_page:
+  url: null
+  confirmed: false
+  probe: >-
+    status.ihg.com returns 301 to https://dash.ihg.com/tools/status.php, which
+    then times out. dash.ihg.com is the hotel-owner intranet, not a public
+    status page. No StatusPage pointer is wired into apis.yml because no public
+    status page exists.
+retirement_event:
+  name: PartnerConnect RoomService developer portal
+  host: pcroomservice.ihg.com
+  platform: TIBCO Mashery
+  status: decommissioned
+  live_through: '2017'
+  dns_state: NXDOMAIN on 8.8.8.8, 1.1.1.1 and 9.9.9.9 as of 2026-07-28
+  archive: https://web.archive.org/web/20170503133654/https://pcroomservice.ihg.com/api_description
+  what_was_lost:
+  - Self-service registration and an API key console ("My API's") with separate
+    staging and production keys
+  - An I/O Docs interactive console
+  - An API gallery and a support forum
+  - A published IHG Commercial API Terms of Use
+  - Five named APIs — Hotel Descriptive Info, Single Property Availability,
+    Rate range (AREA availability), Hotel Search, and Single Property
+    Availability with Rate Rules
+  successor: none
+  note: >-
+    No migration guide, no successor portal, no redirect and no archive was
+    published by IHG. The gateway itself outlived the portal: api.ihg.com still
+    CNAMEs to ihg.api.mashery.com with an sb-ihg.mashery.com sandbox in the
+    chain. The 2015-2019 Mashery portal remains the high-water mark of IHG's
+    API openness; the programme has moved backwards since.
+platform_lifecycle:
+  note: >-
+    The one genuine, dated lifecycle transition IHG does publish is at the
+    platform layer rather than the API layer. HOLIDEX, Holiday Inn's
+    proprietary central reservation system in service since 1965, was retired
+    in favour of a cloud Guest Reservation System co-developed with Amadeus
+    (partnership announced 2015, migration rolled out across 2018 and early
+    2019). Group and meetings bookings route into Amadeus Delphi and Meeting
+    Broker. IHG's reservation platform is a GDS company's product.
+deprecated_operations: []

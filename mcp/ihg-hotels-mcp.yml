@@ -1,0 +1,53 @@
+generated: '2026-07-28'
+method: searched
+status: none-published
+source: >-
+  Live JSON-RPC probes of mcp.ihg.com and apis.ihg.com, plus npm registry and
+  MCP registry search. Probed 2026-07-28.
+summary: >-
+  IHG publishes no Model Context Protocol server. No first-party MCP endpoint,
+  no manifest, no tool list and no OAuth protected-resource metadata exists at
+  any IHG hostname. No `MCPServer` pointer is wired into apis.yml, because
+  wiring one would credit IHG with an agent surface it does not operate.
+  No candidate tool list can be derived either: the derivation input is an
+  OpenAPI document, and IHG publishes none (see well-known/ihg-hotels-well-known.yml).
+server: null
+tools: []
+probes:
+- url: https://mcp.ihg.com/
+  method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  accept: application/json, text/event-stream
+  status: 403
+- {url: 'https://mcp.ihg.com/mcp', status: 403}
+- {url: 'https://mcp.ihg.com/sse', status: 403}
+- {url: 'https://apis.ihg.com/mcp', status: 403}
+- {url: 'https://mcp.ihg.com/.well-known/oauth-protected-resource', status: 403}
+- {url: 'https://mcp.ihg.com/.well-known/oauth-authorization-server', status: 403}
+hostname_note: >-
+  mcp.ihg.com resolves to mcp.ihg.edgekey.net and is real, but its purpose is
+  undocumented and is NOT assumed to be Model Context Protocol. In IHG's estate
+  the initials plausibly stand for something else entirely (a marketing or
+  content platform). Every JSON-RPC and well-known probe returns Akamai
+  "Access Denied", so nothing can be asserted about it. Recording it as an MCP
+  server on the strength of the hostname alone would be fabrication.
+third_party_servers:
+- name: '@striderlabs/mcp-ihg'
+  url: https://www.npmjs.com/package/@striderlabs/mcp-ihg
+  version: 1.0.1
+  published: '2026-06-17'
+  transport: stdio
+  official: false
+  technique: playwright-browser-automation
+  note: >-
+    A third-party MCP server that gives an agent IHG hotel search and booking
+    by driving ihg.com in a headless browser. It exists because there is no IHG
+    API to call. It is not an IHG interface, carries no IHG endorsement, and is
+    listed here as market evidence only — the agent-era demand for IHG
+    inventory is real and is currently being served by scraping.
+agent_readiness_note: >-
+  For an agent, IHG is closed. There is no MCP server, no OpenAPI to forge tools
+  from, no llms.txt on www.ihg.com (403), no /.well-known/ discovery of any
+  kind, and no documented authentication. The only programmatic routes to IHG
+  inventory an agent can actually take are through third parties — Amadeus,
+  Sabre, Travelport, Expedia Rapid, the Booking.com Demand API and the bedbanks
+  — or through browser automation of ihg.com.

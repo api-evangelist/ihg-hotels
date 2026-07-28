@@ -68,6 +68,27 @@ modified: '2026-07-28'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  name: TLS, HSTS, DNSSEC, CAA, SPF and DMARC probe of every IHG host
+  url: security/ihg-hotels-domain-security.yml
+- type: WellKnownProbe
+  name: /.well-known/ and contract-discovery probe matrix (no documents found)
+  url: well-known/ihg-hotels-well-known.yml
+- type: Conformance
+  name: Standards conformance assessment (nothing published to measure)
+  url: conformance/ihg-hotels-conformance.yml
+- type: Lifecycle
+  name: API lifecycle, and the retirement of the PartnerConnect RoomService programme
+  url: lifecycle/ihg-hotels-lifecycle.yml
+- type: Packages
+  name: Package-registry sweep (no first-party client library in any language)
+  url: packages/ihg-hotels-packages.yml
+- type: MCPAssessment
+  name: Agent-surface assessment (no first-party MCP server)
+  url: mcp/ihg-hotels-mcp.yml
+- type: LLMsTxt
+  name: Generated llms.txt for IHG Hotels & Resorts
+  url: llms/ihg-hotels-llms.txt
 - type: Website
   url: https://www.ihg.com/
 - type: CorporateWebsite
@@ -79,7 +100,7 @@ common:
 - type: PartnerProgramFAQ
   name: PartnerConnect frequently asked questions (PDF)
   url: https://partnerconnect.ihg.com/wp-content/uploads/2017/04/FAQ-PartnerConnect.pdf
-- type: Signup
+- type: SignUp
   name: PartnerConnect publisher signup via Commission Junction
   url: https://signup.cj.com/member/signup/publisher/?cid=1675692
 - type: RetiredDeveloperPortal
@@ -88,7 +109,8 @@ common:
 - type: RetiredAPITermsOfUse
   name: IHG Commercial API Terms of Use (archived 2015)
   url: https://web.archive.org/web/20150926153219/https://pcroomservice.ihg.com/Terms_of_use
-- type: PrivacyStatement
+- type: PrivacyPolicy
+  name: IHG privacy statement
   url: https://www.ihg.com/content/us/en/customer-care/privacy_statement
 - type: PrivacyPortal
   name: IHG Privacy and Cookie Center
@@ -113,6 +135,15 @@ common:
 - type: Contact
   name: IHG Data Protection Officer / privacy office
   url: mailto:privacyoffice@ihg.com
+- type: Support
+  name: IHG corporate contact routes (media, investor, privacy office, suppliers)
+  url: https://www.ihgplc.com/en/contact-us
+- type: Newsroom
+  name: IHG news releases
+  url: https://www.ihgplc.com/en/news-and-media/news-releases
+- type: PolicyLibrary
+  name: IHG responsible-business policy documents (no information-security policy published)
+  url: https://www.ihgplc.com/en/responsible-business/policies-and-position-statements/policy-documents
 - type: LinkedIn
   url: https://www.linkedin.com/company/ihg
 maintainers:
