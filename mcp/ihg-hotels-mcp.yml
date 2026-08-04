@@ -1,6 +1,7 @@
 generated: '2026-07-28'
 method: searched
-status: none-published
+status: none
+status_raw: none-published
 source: >-
   Live JSON-RPC probes of mcp.ihg.com and apis.ihg.com, plus npm registry and
   MCP registry search. Probed 2026-07-28.
